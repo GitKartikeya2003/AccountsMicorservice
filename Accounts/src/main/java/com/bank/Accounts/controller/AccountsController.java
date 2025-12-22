@@ -2,9 +2,9 @@ package com.bank.Accounts.controller;
 
 
 import com.bank.Accounts.constants.AccountsConstants;
-import com.bank.Accounts.dto.AccountsDto;
 import com.bank.Accounts.dto.CustomerDto;
 import com.bank.Accounts.dto.ResponseDto;
+import com.bank.Accounts.entity.Customer;
 import com.bank.Accounts.service.IAccountsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,9 +31,11 @@ public class AccountsController {
     }
 
     @GetMapping("/fetch")
-    public ResponseEntity<ResponseDto> fetchAccountDetails(@RequestParam String mobileNumber) {
+    public ResponseEntity<CustomerDto> fetchAccountDetails(@RequestParam String mobileNumber) {
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseDto(AccountsConstants.STATUS_201,AccountsConstants.));
+        CustomerDto customerDto = iAccountsService.fetchAccount(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(customerDto);
 
 
     }

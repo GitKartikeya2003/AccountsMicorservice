@@ -2,11 +2,13 @@ package com.bank.Accounts.service.impl;
 
 
 import com.bank.Accounts.constants.AccountsConstants;
+import com.bank.Accounts.dto.AccountsDto;
 import com.bank.Accounts.dto.CustomerDto;
 import com.bank.Accounts.entity.Accounts;
 import com.bank.Accounts.entity.Customer;
 import com.bank.Accounts.exception.CustomerAlreadyExistException;
 import com.bank.Accounts.exception.ResourceNotFoundException;
+import com.bank.Accounts.mapper.AccountsMapper;
 import com.bank.Accounts.mapper.CustomerMapper;
 import com.bank.Accounts.repository.AccountsRepository;
 import com.bank.Accounts.repository.CustomerRepository;
@@ -60,13 +62,14 @@ public class AccountsServiceImpl implements IAccountsService {
 
     @Override
     public CustomerDto fetchAccount(String mobileNumber) {
-
-//        customerRepository.findByMobileNumber(mobileNumber).orElse(
-//                ()-> new ResourceNotFoundException("Customer","mobile Number",mobileNumber)
-//        );
-        return null;
-
-
-
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+                () -> new ResourceNotFoundException("Account", "customerId", customer.getCustomerId().toString())
+        );
+        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer, new CustomerDto());
+        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts, new AccountsDto()));
+        return customerDto;
     }
 }
