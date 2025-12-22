@@ -1,9 +1,7 @@
 package com.bank.Accounts.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +14,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class BaseEntity {
 
-
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
@@ -28,5 +25,23 @@ public class BaseEntity {
 
     @Column(updatable = false)
     private String updatedBy;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        if (this.createdBy == null) {
+            this.createdBy = "SYSTEM"; // or security principal
+        }
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+        if (this.updatedBy == null) {
+            this.updatedBy = "SYSTEM";
+        }
+    }
+
+
 }
 
