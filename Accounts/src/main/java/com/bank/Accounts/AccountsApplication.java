@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-@OpenAPIDefinition(
+@OpenAPIDefinition(     //Swagger part
         info = @Info(
                 title = "Accounts microservice Rest api documentation",
                 description = "EasyBank Accounts microservice REST Api documentation",
@@ -27,7 +27,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
                 )
         ),
         externalDocs = @ExternalDocumentation(
-                description = "aoignworinwir",
+                description = "External Documentation ",
                 url = "http://ExternalDocsLink"
         )
 )
