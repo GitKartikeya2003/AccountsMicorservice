@@ -1,6 +1,7 @@
 package com.bank.Accounts.dto;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
@@ -12,6 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Schema(
+        name = "Customer",
+        description = "Schema to hold customer and Account information"
+)
 public class CustomerDto {
 
 

@@ -3,10 +3,14 @@ package com.bank.Accounts.controller;
 
 import com.bank.Accounts.constants.AccountsConstants;
 import com.bank.Accounts.dto.CustomerDto;
+import com.bank.Accounts.dto.ErrorResponseDto;
 import com.bank.Accounts.dto.ResponseDto;
 import com.bank.Accounts.entity.Customer;
 import com.bank.Accounts.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -68,7 +72,10 @@ public class AccountsController {
                     @ApiResponse(responseCode = "200"
                             , description = "Account updated Successfully(OK)"),
                     @ApiResponse(responseCode = "500"
-                    ,description = "Something wrong occured")
+                            , description = "Something wrong occured"
+                            , content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    ))
             }
     )
     @PutMapping("/update")
