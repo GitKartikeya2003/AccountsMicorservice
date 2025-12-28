@@ -19,7 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
                 contact = @Contact(
                         name = "Kartikeya Gupta",
                         email = "kartikeyayash4@gmail.com",
-                        url = "http://aogrinoanorbn"
+                        url = "https://www.linkedin.com/in/kartikeya02112003/"
                 ),
                 license = @License(
                         name = "Apache 2.0",
