@@ -2,13 +2,12 @@ package com.bank.Accounts.controller;
 
 
 import com.bank.Accounts.constants.AccountsConstants;
+import com.bank.Accounts.dto.AccountsContactInfoDto;
 import com.bank.Accounts.dto.CustomerDto;
 import com.bank.Accounts.dto.ErrorResponseDto;
 import com.bank.Accounts.dto.ResponseDto;
-import com.bank.Accounts.entity.Customer;
 import com.bank.Accounts.service.IAccountsService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -17,6 +16,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,20 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class AccountsController {
 
+    private final IAccountsService iAccountsService;
+
+    AccountsController(IAccountsService iAccountsService) {
+        this.iAccountsService = iAccountsService;
+    }
+
+    @Value("${build.version}")
+    private String buildVersion;
+
     @Autowired
-    private IAccountsService iAccountsService;
+    private Environment environment;
+
+
+
 
     @Operation(summary = "Create account REST Api"
             , description = "Creation of new Customer and Account in the bank")
@@ -113,6 +126,49 @@ public class AccountsController {
                     .body(new ResponseDto(AccountsConstants.STATUS_500, AccountsConstants.MESSAGE_500));
         }
     }
+
+
+
+    @Operation(summary = "Get build version info"
+            , description = "Get build information deployed in accounts microservice")
+    @ApiResponse(responseCode = "200", description = "Ac count fetched")
+    @GetMapping("/build-info")
+    public ResponseEntity<String> buildVersion() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(buildVersion);
+    }
+
+//    @Operation(summary = "Get java version info"
+//            , description = "Get java version information deployed in accounts microservice")
+//    @ApiResponse(responseCode = "200", description = "Ac count fetched")
+//    @GetMapping("/java-info")
+//    public ResponseEntity<String> getJavaVersion() {
+//
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(environment.getProperty(buildVersion));
+//
+//    }
+
+
+    @Autowired
+    private AccountsContactInfoDto accountsContactInfoDto;
+
+    @Operation(summary = "Get contact info "
+            , description = "Get contact information of the developer who built accounts microservice")
+    @ApiResponse(responseCode = "200", description = "Ac count fetched")
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactDetails() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
+    }
+
+
+
+
+
+
+
 
 
 }
