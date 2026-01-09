@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to Bank accounts related QA APIs "
+  contactDetails:
+    name: "Kartikeya Gupta - Developer"
+    email: "kartikeyayash4@gmail.com"
+  onCallSupport:
+    - 8707336016

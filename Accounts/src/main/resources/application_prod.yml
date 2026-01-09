@@ -1,0 +1,14 @@
+spring:
+  config:
+    activate:
+      on-profile: "production"
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to Bank accounts related production APIs "
+  contactDetails:
+    name: "Kartikeya Gupta - Developer"
+    email: "kartikeyayash4@gmail.com"
+  onCallSupport:
+    - 8707336016
