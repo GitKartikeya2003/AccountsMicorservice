@@ -40,8 +40,8 @@ public class AccountsController {
         this.iAccountsService = iAccountsService;
     }
 
-    @Value("${build.version}")
-    private String buildVersion;
+//    @Value("${build.version}")
+//    private String buildVersion;
 
     @Autowired
     private Environment environment;
@@ -129,14 +129,14 @@ public class AccountsController {
 
 
 
-    @Operation(summary = "Get build version info"
-            , description = "Get build information deployed in accounts microservice")
-    @ApiResponse(responseCode = "200", description = "Ac count fetched")
-    @GetMapping("/build-info")
-    public ResponseEntity<String> buildVersion() {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(buildVersion);
-    }
+//    @Operation(summary = "Get build version info"
+//            , description = "Get build information deployed in accounts microservice")
+//    @ApiResponse(responseCode = "200", description = "Ac count fetched")
+//    @GetMapping("/build-info")
+//    public ResponseEntity<String> buildVersion() {
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(buildVersion);
+//    }
 
 //    @Operation(summary = "Get java version info"
 //            , description = "Get java version information deployed in accounts microservice")
