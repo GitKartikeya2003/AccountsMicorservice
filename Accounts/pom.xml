@@ -157,7 +157,7 @@
 				<version>3.5.1</version>
 				<configuration>
 					<to>
-						<image>dockerkartikeya/accounts:v6</image>
+						<image>dockerkartikeya/accounts:v8</image>
 					</to>
 				</configuration>
 			</plugin>
