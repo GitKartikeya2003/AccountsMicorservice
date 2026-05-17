@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-@FeignClient("cards")
+@FeignClient(value = "cards",fallback =  CardsFallback.class)
 public interface CardsFeignClients {
 
 
