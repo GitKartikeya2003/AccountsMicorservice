@@ -70,3 +70,11 @@ resilience4j.circuitbreaker:
       permittedNumberOfCallsInHalfOpenState: 2  # I want my circuit breaker pattern to try 2 request in the half open circuit state based on  response it will decide what to do whether go to closed state or go to full open state
       failureRateThreshold: 50  # if ate least 50 percent of the request are failed then move to open circuit state
       waitDurationInOpenState: 10000 # 10 sec
+
+resilience4j.retry:
+  configs:
+    default:
+      maxAttempts: 3
+      waitDuration: 100
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
