@@ -71,14 +71,25 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50  # if ate least 50 percent of the request are failed then move to open circuit state
       waitDurationInOpenState: 10000 # 10 sec
 
-resilience4j.retry:
-  configs:
-    default:
-      maxAttempts: 3
-      waitDuration: 100
-      enableExponentialBackoff: true
-      exponentialBackoffMultiplier: 2
-      ignoreExceptions:
-        -java.lang.NullPointerException
-      retryExceptions:    #if I write this then I don't need to write ignore Exceptions
-        -java.util.concurrent.TimeoutException
+
+resilience4j:
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 100ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        ignoreExceptions:
+          - java.lang.NullPointerException
+        retryExceptions:  #if I write this then I don't need to write ignore Exceptions
+          - java.util.concurrent.TimeoutException
+  ratelimiter:
+    configs:
+      default:
+        timeoutDuration: 1s
+        limitRefreshPeriod: 5s
+        limitForPeriod: 1
+    instances:
+      javaVersion:
+        baseConfig: default   # ← explicitly wire the instance
