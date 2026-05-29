@@ -138,9 +138,10 @@ public class AccountsController {
     @GetMapping("/build-info")
     public ResponseEntity<String> buildVersion() {
         log.debug("Build Version Info method Called");
-        throw new RuntimeException("buildVersionFallback");
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body("1.0");
+
+       // throw new RuntimeException("buildVersionFallback");
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("1.0");
     }
 
     public ResponseEntity<String> buildVersionFallback(Throwable throwable){
